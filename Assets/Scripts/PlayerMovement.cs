@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] private SavingApples _savingApples;
 
     [SerializeField] private float moveSpeed = 1f;
@@ -31,12 +30,13 @@ public class PlayerMovement : MonoBehaviour
     private float rayDistance = 0.25f;
 
     private int startingHealth = 5;
-    private int currentHealth = 0;
+    public int currentHealth = 0;
 
     public int applesCollected;
 
     private bool isGrounded;
     private bool canMove;
+    public bool battleStarted;
 
     private AudioSource audioSource;
     private Animator anim;
@@ -117,6 +117,19 @@ public class PlayerMovement : MonoBehaviour
             audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
             audioSource.PlayOneShot(enemyHitSound, 0.5f);
         }
+
+        if (other.CompareTag("Projectile"))
+        {
+            TakeDamage(1);
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("BattleStart"))
+        {
+            battleStarted = true;
+            other.enabled = false;
+        }
+
     }
 
     private void FlipSprite(bool direction)
@@ -138,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(playerHitSound, 0.5f);
         UpdateHealthBar();
 
-        print(currentHealth);
+        //print(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -165,6 +178,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Respawn()
     {
+        if (battleStarted == true)
+        {
+            battleStarted = false;
+        }
         currentHealth = startingHealth;
         UpdateHealthBar();
         //transform.position = spawnPosition.position;

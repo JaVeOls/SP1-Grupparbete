@@ -9,18 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 69cfc431d1fcf70438dbe06e5b121235
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Level3_Hell.unity
+    guid: aec1599fd25c7c0448aeef1903f5ea5e
   - enabled: 1
-    path: Assets/Scenes/Level1.5.unity
-    guid: d5c7f61a3d262f84f9c460fa8ab0d7be
-  - enabled: 1
-    path: Assets/Scenes/Level2.unity
-    guid: 48927d145dc53f141abee601431d77c4
-  - enabled: 1
-    path: Assets/Scenes/Level2.5.unity
-    guid: dd20fbd8de3d04c48a27efa80d74c05b
-  - enabled: 1
-    path: Assets/Scenes/Level3.unity
-    guid: 96d960a1c6569ed4f81b3a758b9878fa
+    path: Assets/Scenes/BossBattle.unity
+    guid: 690a527b9eb3995459aaee7fdd54ab9b
   m_configObjects: {}

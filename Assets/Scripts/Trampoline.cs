@@ -14,7 +14,7 @@ public class Trampoline : MonoBehaviour
             Rigidbody2D playerRigidbody = other.GetComponent<Rigidbody2D>();
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
-            GetComponent<Animator>().SetTrigger("Jump");
+            //GetComponent<Animator>().SetTrigger("Jump");
             GetComponent<AudioSource>().PlayOneShot(bounceSound, 0.5f);
         }
     }

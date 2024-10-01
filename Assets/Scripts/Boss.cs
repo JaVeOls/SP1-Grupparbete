@@ -30,7 +30,7 @@ public class Boss : MonoBehaviour
     private GameObject instHealth;
     private Transform PowerUpSpawn;
     private BoxCollider2D coll;
-    //private animator anim;
+    private Animator anim;
 
     private bool inRange;
     public bool inBattle;
@@ -50,12 +50,12 @@ public class Boss : MonoBehaviour
     //
     // - Maybe a start up animation
     // - A way off telling when the phase changes
-    //      - If so, animation should play in the CollisionEnable function
+    // - If so, animation should play in the CollisionEnable function
 
     void Start()
     {
         coll = GetComponent<BoxCollider2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         health = maxHealth;
         inRange = false;
         playerMovement.battleStarted = false;
@@ -227,6 +227,8 @@ public class Boss : MonoBehaviour
         }
         lastAttack = Time.time;
         //Boss takes damage
+        anim.SetTrigger("TakeHit");
+        anim.SetBool("ReadyHit", false);
         health -= damage;
     }
 
@@ -283,6 +285,7 @@ public class Boss : MonoBehaviour
             while (_time >= _interval && waveCount <= 2)
             {
                 Attack();
+                anim.SetTrigger("Attack");
                 _time -= _interval;
                 waveCount++;
             }
@@ -300,10 +303,12 @@ public class Boss : MonoBehaviour
         //Wait time amount of seconds before enabling the boss's collider
         yield return new WaitForSeconds(time);
         coll.enabled = true;
+        anim.SetBool("ReadyHit", true);
         //Debug.Log("ENABLE");
         yield return new WaitForSeconds(time);
         //Wait time amount of seconds before dissabling the boss's collider
         coll.enabled = false;
+        anim.SetBool("ReadyHit", false);
         //Debug.Log("DISSABLE");
         //Restart the waves
         waveCount = 0;
@@ -315,6 +320,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(time);
         coll.enabled = true;
         counted = nextLevel;
+        anim.SetBool("ReadyHit", false);
         //Debug.Log("ENABLE");
     }
     private void CollisionDissable()
@@ -332,7 +338,7 @@ public class Boss : MonoBehaviour
         playerMovement.battleStarted = false;
         Destroy(gameObject, 0.4f);
         healthbar.SetActive(false);
-        //Add Death animation
+        anim.SetTrigger("Death");
     }
 
     private void RestartBattle()

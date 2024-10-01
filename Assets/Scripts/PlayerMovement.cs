@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpForce = 300f;
     [SerializeField] private Transform leftFoot, rightFoot;
-    //[SerializeField] private Transform spawnPosition;
+    [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
 
     [SerializeField] private Slider healthSlider;
@@ -21,10 +21,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Color greenHealth, redHealth;
     [SerializeField] private TMP_Text appleText;
 
-    [SerializeField] private AudioClip pickupSound, healthSound, playerHitSound, enemyHitSound;
-    [SerializeField] private AudioClip[] jumpSounds;
+    [SerializeField] private AudioClip pickupSound, healthSound, playerHitSound, enemyHitSound, jumpSounds;
+    //[SerializeField] private AudioClip[] jumpSounds;
 
-    [SerializeField] private GameObject appleParticles, dustParticles;
+    [SerializeField] private GameObject appleParticles, dustParticles, mushroomParticles;
+    
 
     private float horizontalValue;
     private float rayDistance = 0.25f;
@@ -110,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Health"))
         {
             RestoreHealth(other.gameObject);
+           
         }
 
         if (other.CompareTag("Enemy"))
@@ -139,8 +141,10 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(new Vector2(0, jumpForce));
-        int randomValue = UnityEngine.Random.Range(0, jumpSounds.Length);
-        audioSource.PlayOneShot(jumpSounds[randomValue], 0.5f);
+        //int randomValue = UnityEngine.Random.Range(0, jumpSounds.Length);
+        audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(jumpSounds, 0.5f);
+        //audioSource.PlayOneShot(jumpSounds[randomValue], 0.5f);
         Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
     }
 
@@ -201,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
             currentHealth += healthToRestore;
             audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
             audioSource.PlayOneShot(healthSound, 0.5f);
+            Instantiate(mushroomParticles, transform.position, dustParticles.transform.localRotation);
             UpdateHealthBar();
             Destroy(healthPickup);
 

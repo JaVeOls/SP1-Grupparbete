@@ -5,21 +5,35 @@ using UnityEngine;
 public class EnemyMovements : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2.0f;
-    [SerializeField] private float bounciness = 100;
+   // [SerializeField] private float bounciness = 100;
     [SerializeField] private float knockbackForce = 200f;
     [SerializeField] private float upwardForce = 100f;
-
+    [SerializeField] private GameObject player;
     [SerializeField] private int damageGiven = 1;
+
 
     private SpriteRenderer rend;
     private Animator anim;
+    private Animator playAnim;
 
     private bool canMove = true;
+
+    private bool inRange;
 
     private void Start()
     {
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        playAnim = player.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && inRange == true)
+        {
+
+            TakeDamage();
+        }
     }
 
     void FixedUpdate()
@@ -30,20 +44,22 @@ public class EnemyMovements : MonoBehaviour
 
         if (moveSpeed < 0)
         {
-            rend.flipX = false;
+            rend.flipX = true;  //
         }
 
         if (moveSpeed > 0)
         {
-            rend.flipX = true;
+            rend.flipX = false;  //
         }
+
+      
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("EnemyBlock"))
         {
-            moveSpeed = -moveSpeed;
+            moveSpeed = -moveSpeed;  
         }
 
         if (other.gameObject.CompareTag("Enemy"))
@@ -67,20 +83,40 @@ public class EnemyMovements : MonoBehaviour
         }
     }
 
+
+
+    private void TakeDamage()
+    {
+        anim.SetTrigger("Hit");
+
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CapsuleCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+           // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            Destroy(gameObject, 0.8f);
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, 0);
-            other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounciness));
-            GetComponent<Animator>().SetTrigger("Hit");
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<CapsuleCollider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().gravityScale = 0;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+           
+            inRange = true;
+            Debug.Log("inRange");
+            
             canMove = false;
 
-            Destroy(gameObject, 0.7f);
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = false;
         }
     }
 }

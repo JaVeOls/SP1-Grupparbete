@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,11 @@ public class QuestGiver : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             textPopUp.SetActive(false);
+    
         }
+
+
     }
+
+
 }

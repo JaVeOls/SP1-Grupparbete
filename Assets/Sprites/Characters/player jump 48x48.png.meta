@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ffc4c40de022f6e4a8a4c4fbd0d98fb5
+guid: fb3c8b44fb3314fb1b33672125ec9c29
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,15 +104,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32c8a1686ad94044487db32e4a15e3aa
-      internalID: 2087181169
+      spriteID: a8818705c72574ae1b71dd849d0a61f1
+      internalID: 1896269234
       vertices: []
       indices: 
       edges: []
@@ -125,15 +125,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60c7efab6adee144c8629de71ed81905
-      internalID: 683746197
+      spriteID: 39a6cd3508d3c475cb37268e4f618763
+      internalID: -1948120385
       vertices: []
       indices: 
       edges: []
@@ -146,15 +146,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a9b5d7f6ea881145910974157c8445d
-      internalID: 1542699879
+      spriteID: a0fe55bd5b4f644a09cbf47386eeb91e
+      internalID: 706038007
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player jump 48x48_0: 2087181169
-      player jump 48x48_1: 683746197
-      player jump 48x48_2: 1542699879
+      player jump 48x48_0: 1896269234
+      player jump 48x48_1: -1948120385
+      player jump 48x48_2: 706038007
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
